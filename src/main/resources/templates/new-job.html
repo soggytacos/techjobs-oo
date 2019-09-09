@@ -8,12 +8,14 @@
 
 <div class="container body-content">
 
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
     <form th:object="${jobForm}" method="post">
 
         <div class="form-group">
             <label th:for="name">Name</label>
             <input th:field="*{name}" />
-            <div th:errors="*{name}"></div>
+            <span th:errors="*{name}" class="error"></span>
         </div>
 
         <div class="form-group">
@@ -23,9 +25,38 @@
                         th:value="${employer.id}"
                         th:text="${employer.value}"></option>
             </select>
+            <span th:errors="*{employerId}" class="error"></span>
         </div>
 
         <!-- TODO #5 - Create <select> dropdowns for other job fields -->
+
+        <div class="form-group">
+            <label th:for="locationId">Employer</label>
+            <select th:field="*{locationId}">
+                <option th:each="location : *{locations}"
+                        th:value="${location.id}"
+                        th:text="${location.value}"></option>
+            </select>
+            <span th:errors="*{locationId}" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label th:for="coreCompetencyId">Employer</label>
+            <select th:field="*{coreCompetencyId}">
+                <option th:each="coreCompetency : *{coreCompetencies}"
+                        th:value="${coreCompetency.id}"
+                        th:text="${coreCompetency.value}"></option>
+            </select>
+            <span th:errors="*{coreCompetencyId}" class="error"></span>
+        </div>
+        <div class="form-group">
+            <label th:for="positionTypeId">Employer</label>
+            <select th:field="*{positionTypeId}">
+                <option th:each="positionType : *{positionTypes}"
+                        th:value="${positionType.id}"
+                        th:text="${positionType.value}"></option>
+            </select>
+            <span th:errors="*{positionTypeId}" class="error"></span>
+        </div>
 
         <input type="submit" value="Add Job" />
     </form>
